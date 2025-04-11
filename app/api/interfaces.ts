@@ -1,23 +1,23 @@
 export interface Dog {
-    id: string
-    img: string
-    name: string
-    age: number
-    zip_code: string
-    breed: string
+    id: string;
+    img: string;
+    name: string;
+    age: number;
+    zip_code: string;
+    breed: string;
 }
 export interface User {
-    id: string
-    name: string
-    email: string
+    id?: string;
+    name?: string;
+    email?: string;
 }
 export interface Location {
-    zip_code: string
-    latitude: number
-    longitude: number
-    city: string
-    state: string
-    county: string
+    zip_code: string;
+    latitude: number;
+    longitude: number;
+    city: string;
+    state: string;
+    county: string;
 }
 export interface Coordinates {
     lat: number;

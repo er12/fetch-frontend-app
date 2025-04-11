@@ -5,7 +5,7 @@ const AUTH_LOGIN_ENDPOINT = '/auth/login';
 const AUTH_LOGOUT_ENDPOINT = '/auth/logout';
 
 // Service to login users
-export async function logIn(user: User): Promise<boolean> {
+async function logIn(user: User): Promise<boolean> {
     const response = await api.post(AUTH_LOGIN_ENDPOINT, user);
     if (response.status !== 200) {
         throw new Error('Failed to log in user');
@@ -14,10 +14,15 @@ export async function logIn(user: User): Promise<boolean> {
 }
 
 
-export async function logOut(): Promise<boolean> {
+async function logOut(): Promise<boolean> {
     const response = await api.post(AUTH_LOGOUT_ENDPOINT);
     if (response.status !== 200) {
         throw new Error('Failed to log out');
     }
     return true;
 }
+
+export const userService = {
+    logIn,
+    logOut,    
+  };
