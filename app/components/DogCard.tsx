@@ -42,7 +42,6 @@ export default function DogCard({ dog, isFavorite }: DogCardProps) {
         component="img"
         height="140"
         image={dog.img}
-        // image={`https://picsum.photos/id/237/300/300`}
         alt={`${dog.name} ${dog.breed}`}
         sx={{ height: 300 }}
       />

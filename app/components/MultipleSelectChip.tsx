@@ -49,9 +49,14 @@ export default function MultipleSelectChip({ label, values, onChange }: Multiple
     onChange?.(splitNames);
   };
 
+  React.useEffect(() => {
+      setValueNames([]);
+      onChange?.([]);
+  }, [values]);
+
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 450 }}>
+      <FormControl sx={{ width: 450 }}>
         <InputLabel id="demo-multiple-chip-label">{label}</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"

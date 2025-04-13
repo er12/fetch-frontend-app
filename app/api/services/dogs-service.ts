@@ -1,5 +1,5 @@
 import api from "../axios-instance";
-import { SearchParams } from "../interfaces";
+import { Dog, SearchParams } from "../interfaces";
 
 const DOGS_BREEDS_ENDPOINT = '/dogs/breeds';
 const DOGS_SEARCH_ENDPOINT = '/dogs/search';
@@ -25,7 +25,7 @@ export interface DogsSearchResponse {
     prev?: string;
 }
 
-const fetchDogBreeds = async (): Promise<string[]> => {
+const searchDogBreeds = async (): Promise<string[]> => {
     const response = await api.get(DOGS_BREEDS_ENDPOINT);
     return response.data;
 };
@@ -35,7 +35,7 @@ const searchDogsIDs = async (query: DogsSearchParams): Promise<DogsSearchRespons
     return response.data;
 };
 
-const getDogsByIds = async (dogIds: string[]) => {
+const getDogsByIds = async (dogIds: string[]): Promise<Dog[]> => {
     const response = await api.post(DOGS_BY_IDS_ENDPOINT, dogIds);
     return response.data;
 };
@@ -47,7 +47,7 @@ const matchDogs = async (dogsIds: string[]): Promise<Match> => {
 
 
 export const dogsService = {
-    fetchDogBreeds,
+    searchDogBreeds,
     searchDogsIDs,
     getDogsByIds,
     matchDogs,

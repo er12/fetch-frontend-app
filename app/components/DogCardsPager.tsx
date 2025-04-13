@@ -13,14 +13,15 @@ interface DogCardsPagerProps {
   onPageChange?: (page: number) => void;
 }
 
-const GRID_CLASS_NAME = "grid grid-cols-4 justify-items-center gap-4 p-4";
+// If you want to change the columns, you can change the class name here
+const GRID_CLASS_NAME = "grid grid-cols-4 justify-items-center gap-4";
 
 export default function DogCardsPager({
   dogs,
   currentPage,
   pages,
   favorites,
-  onPageChange
+  onPageChange,
 }: DogCardsPagerProps) {
 
   return (

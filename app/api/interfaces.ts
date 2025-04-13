@@ -24,7 +24,10 @@ export interface Coordinates {
     lon: number;
 }
 
+export type SortString = `${"breed" | "name" | "age"}:${"asc" | "desc"}`;
+
 export interface SearchParams {
     from?: number;
     size?: number;
+    sort?: SortString;
 }
