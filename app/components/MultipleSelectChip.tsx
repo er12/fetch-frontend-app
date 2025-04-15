@@ -14,7 +14,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: "400px",
+      minWidth: "400px",
     },
   },
 };
@@ -56,14 +56,15 @@ export default function MultipleSelectChip({ label, values, onChange }: Multiple
 
   return (
     <div>
-      <FormControl sx={{ width: 450 }}>
-        <InputLabel id="demo-multiple-chip-label">{label}</InputLabel>
+      <FormControl sx={{ minWidth: 375, width: "100%" }}>
+        <InputLabel id="dog-multiple-chip-label">{label}</InputLabel>
         <Select
-          labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
+          labelId="dog-multiple-chip-label"
+          id="dog-multiple-chip"
           multiple
           value={valueNames}
           onChange={handleChange}
+          sx={{ width: "100%" }}
           input={
             <OutlinedInput
               id="select-multiple-chip"

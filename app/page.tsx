@@ -5,7 +5,7 @@ import DogCardsPager from "./components/DogCardsPager";
 import { DogContext } from "./api/context/DogContext";
 import MultipleSelectChip from "./components/MultipleSelectChip";
 import { Button, CircularProgress, Divider, Typography } from "@mui/material";
-import { Favorite } from "@mui/icons-material";
+import { Favorite, Search } from "@mui/icons-material";
 import { DogsSearchParams, DogsSearchResponse, dogsService } from "./api/services/dogs-service";
 import { Dog, SortString } from "./api/interfaces";
 import ZipCodesInput from "./components/ZipCodesInput";
@@ -44,13 +44,18 @@ export default function Home() {
 
   // Functions
   const onFavoriteChange = (dogId: string) => {
-    let newFavorites = [...favoriteDogsIds];
-    if (favoriteDogsIds?.some(favId => favId === dogId)) {
-      newFavorites = favoriteDogsIds.filter(favId => favId !== dogId);
+    if (favoriteDogsIds?.length < 100) {
+
+      let newFavorites = [...favoriteDogsIds];
+      if (favoriteDogsIds?.some(favId => favId === dogId)) {
+        newFavorites = favoriteDogsIds.filter(favId => favId !== dogId);
+      } else {
+        newFavorites = [...(favoriteDogsIds || []), dogId];
+      }
+      setFavoriteDogsIds(newFavorites);
     } else {
-      newFavorites = [...(favoriteDogsIds || []), dogId];
+      alert("You can only select 100 favorite dogs");
     }
-    setFavoriteDogsIds(newFavorites);
   };
 
   const searchDogsIDs = () => {
@@ -107,6 +112,10 @@ export default function Home() {
   }, [page]);
 
   useEffect(() => {
+    setSearchParams({ ...searchParams, zipCodes: zipCodes });
+  }, [zipCodes]);
+
+  useEffect(() => {
     if (isSearching) {
       searchDogsIDs();
     }
@@ -129,36 +138,50 @@ export default function Home() {
   return (
     <>
       <div className="m-4">
-        <div id="searchbar" className="flex flex-col m-10 white bg-white rounded-lg shadow-md p-10">
-          <div className="grid grid-cols-2 gap-4 mb-10 justify-items-center">
-
-            <MultipleSelectChip
-              label="Dog breeds"
+        <div id="searchbar" className="flex flex-col m-10 white bg-white rounded-lg shadow-md px-10 py-4 ">
+          <Typography variant="h4">
+            {`Search by`}
+          </Typography>
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-2 items-center pt-4 gap-2 lg:gap-10">
+            <div className="flex flex-col">
+              <Typography variant="h6">
+              {`Dog Breed:`}
+              </Typography>
+              <MultipleSelectChip
+              label="Select dog breeds"
               values={dogBreeds}
               onChange={(values) => {
-                setSearchParams({ ...searchParams, breeds: values });
-              }} />
-            <ZipCodesInput setZipCodes={setZipCodes} />
-            <div className="flex flex-col gap-1">
-              <Typography color="black" variant="h6" className="flex text-lg font-semibold">
-                {`Age Range:`}
-              </Typography>
-              <AgeSlider
-                values={[searchParams?.ageMin || 0, searchParams?.ageMax || 15]}
-                setValues={(values) => {
-                  setSearchParams({ ...searchParams, ageMin: values[0], ageMax: values[1] });
-                }}
+              setSearchParams({ ...searchParams, breeds: values });
+              }}
               />
             </div>
-          </div>
+            <div className="flex flex-col">
+              <Typography variant="h6">
+              {`Age Range:`}
+              </Typography>
+              <AgeSlider
+              values={[searchParams?.ageMin || 0, searchParams?.ageMax || 15]}
+              setValues={(values) => {
+              setSearchParams({ ...searchParams, ageMin: values[0], ageMax: values[1] });
+              }}
+              />
+            </div>
+            <div className="flex flex-col">
+              <Typography variant="h6">
+              {`Zip Codes:`}
+              </Typography>
+              <ZipCodesInput setZipCodes={setZipCodes} />
+            </div>
+            </div>
 
-          <div className=" flex flex-row gap-4">
+          <div className="flex flex-row gap-4 mt-10">
             <Button
               id="search-button"
               type="submit"
               variant="contained"
               color="success"
               className="w-3/2"
+              endIcon={<Search />}
               onClick={(e) => {
                 e.preventDefault();
                 setIsSearching(true);
@@ -169,7 +192,7 @@ export default function Home() {
               variant="contained"
               color="secondary"
               className="w-1/2"
-              disabled={!(searchParams?.breeds?.length || zipCodes?.length)}
+              disabled={!(searchParams?.breeds?.length || zipCodes?.length || favoriteDogsIds?.length)}
               onClick={(e) => {
                 e.preventDefault();
                 clearSearch();
@@ -178,9 +201,8 @@ export default function Home() {
         </div>
 
         <div className="flex bg-white flex-col p-8 rounded-lg shadow-md">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex flex-row gap-2">
-
               <h2 className="text-xl font-bold mx-2">Sort by:</h2>
               <SortingButtons
                 value={searchParams?.sort || "breed:asc"}

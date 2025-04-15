@@ -37,6 +37,17 @@ export default function DogCard({ dog, isFavorite }: DogCardProps) {
           transform: "scale(1.05)",
           transition: "transform 0.2s",
         },
+        
+        "@media (min-width: 1024px)": {
+          minWidth: 300,
+          margin: 3,
+          boxShadow: 4,
+        },
+        "@media (min-width: 1920px)": {
+          minWidth: 400,
+          margin: 3,
+          boxShadow: 4,
+        },
       }}>
       <CardMedia
         component="img"

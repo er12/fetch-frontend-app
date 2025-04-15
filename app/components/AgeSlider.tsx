@@ -25,7 +25,7 @@ const AgeSlider: React.FC<ZipCodesInputProps> = ({ values, setValues }) => {
   };
 
   return (
-    <FormControl sx={{ width: 450 }}>
+    <FormControl sx={{ minWidth: 200, width: "100%"}}>
       <Slider
         value={values}
         onChange={handleChange}
