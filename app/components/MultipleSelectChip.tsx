@@ -56,11 +56,10 @@ export default function MultipleSelectChip({ label, values, onChange }: Multiple
 
   return (
     <div>
-      <FormControl sx={{ minWidth: 375, width: "100%" }}>
-        <InputLabel id="dog-multiple-chip-label">{label}</InputLabel>
+      <FormControl sx={{ minWidth: 300, width: "100%" }}>
+        <InputLabel id="multiple-chip-label">{label}</InputLabel>
         <Select
-          labelId="dog-multiple-chip-label"
-          id="dog-multiple-chip"
+          labelId="multiple-chip-label"
           multiple
           value={valueNames}
           onChange={handleChange}

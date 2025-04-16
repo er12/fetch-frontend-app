@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import { Dog } from "../api/interfaces";
 import { IconButton } from "@mui/material";
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import { useDog } from "../api/context/DogContext";
 
@@ -20,7 +19,6 @@ interface DogCardProps {
 
 export default function DogCard({ dog, isFavorite }: DogCardProps) {
   const { onFavoriteChange } = useDog();
-
 
   return (
     <Card
@@ -37,7 +35,7 @@ export default function DogCard({ dog, isFavorite }: DogCardProps) {
           transform: "scale(1.05)",
           transition: "transform 0.2s",
         },
-        
+
         "@media (min-width: 1024px)": {
           minWidth: 300,
           margin: 3,
@@ -48,7 +46,9 @@ export default function DogCard({ dog, isFavorite }: DogCardProps) {
           margin: 3,
           boxShadow: 4,
         },
-      }}>
+      }}
+      onClick={() => onFavoriteChange?.(dog.id)}>
+        
       <CardMedia
         component="img"
         height="140"
@@ -68,12 +68,7 @@ export default function DogCard({ dog, isFavorite }: DogCardProps) {
           {`Zip code:  ${dog.zip_code}`}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        {onFavoriteChange && (
-          <IconButton aria-label="add to favorites" onClick={() => onFavoriteChange(dog.id)}>
-            <FavoriteIcon color={isFavorite ? "error" : "action"} />
-          </IconButton>
-        )}
+      <CardActions >
         <IconButton aria-label="share">
           <Link href={`https://www.google.com/search?q=${dog.breed}`} target="_blank" rel="noopener noreferrer">
             <ShareIcon />

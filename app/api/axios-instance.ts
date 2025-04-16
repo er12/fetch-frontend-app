@@ -19,8 +19,8 @@ api.interceptors.response.use(
         console.error("API Error:", error.response?.data || error.message);
 
         // TODO: Handle 401 Unauthorized error
-        window.location.href = '/login';
-        NextResponse.redirect(new URL('/login', window.location.origin));
+        // window.location.href = '/login';
+        // NextResponse.redirect(new URL('/login', window.location.origin));
         return Promise.reject(error);
     }
 );

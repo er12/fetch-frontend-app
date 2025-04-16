@@ -17,10 +17,7 @@ export default function NavBar() {
 
   const logOut = () => {
     userService.logOut().then(() => {
-      console.log("Logged Out");
-
       setUserName(null);
-
       router.push("/login");
     }).catch((err) => {
       console.log("Error logging out: ", err);
@@ -34,9 +31,9 @@ export default function NavBar() {
   //     router.push("/login");
   //   }
   // }, [userName]);
-  
-  // if(!userName || userName == "null") return null;
-  
+
+  if (!userName || userName == "null") return null;
+
   // Render the NavBar only if userName is not null
   return (
     <Box sx={{ flexGrow: 1 }} >
@@ -45,7 +42,7 @@ export default function NavBar() {
           <PetsIcon sx={{ display: { xs: 'none', sm: 'block' }, color: "black" }} />
           <Typography variant="h5" component="div" sx={{ marginX: 4 }}>
             {"Fetch Dogs Front End"}
-            </Typography>
+          </Typography>
           <div style={{ flexGrow: 1 }} />
           <Typography variant="h6" component="div" sx={{ marginX: 4 }}>
             User: {userName}

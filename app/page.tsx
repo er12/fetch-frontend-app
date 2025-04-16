@@ -12,6 +12,7 @@ import ZipCodesInput from "./components/ZipCodesInput";
 import AgeSlider from "./components/AgeSlider";
 import SortingButtons from "./components/SortingButtons";
 import DogModal from "./components/DogModal";
+import LocationAccordion from "./components/LocationAccordion";
 
 const DOGS_PER_PAGE = 16;
 
@@ -124,9 +125,9 @@ export default function Home() {
   useEffect(() => {
     dogsService.getDogsByIds(dogsSearchResponse?.resultIds || []).then((res) => {
       setSearchedDogs(res);
-      setIsSearching(false);
     }).catch((err) => {
       console.error(err);
+    }).finally(() => {
       setIsSearching(false);
     });
   }, [dogsSearchResponse?.resultIds]);
@@ -142,37 +143,40 @@ export default function Home() {
           <Typography variant="h4">
             {`Search by`}
           </Typography>
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-2 items-center pt-4 gap-2 lg:gap-10">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-2 items-center pt-4 gap-2 lg:gap-10">
             <div className="flex flex-col">
               <Typography variant="h6">
-              {`Dog Breed:`}
+                {`Dog Breed:`}
               </Typography>
               <MultipleSelectChip
-              label="Select dog breeds"
-              values={dogBreeds}
-              onChange={(values) => {
-              setSearchParams({ ...searchParams, breeds: values });
-              }}
+                label="Select dog breeds"
+                values={dogBreeds}
+                onChange={(values) => {
+                  setSearchParams({ ...searchParams, breeds: values });
+                }}
               />
             </div>
             <div className="flex flex-col">
               <Typography variant="h6">
-              {`Age Range:`}
+                {`Age Range:`}
               </Typography>
               <AgeSlider
-              values={[searchParams?.ageMin || 0, searchParams?.ageMax || 15]}
-              setValues={(values) => {
-              setSearchParams({ ...searchParams, ageMin: values[0], ageMax: values[1] });
-              }}
+                values={[searchParams?.ageMin || 0, searchParams?.ageMax || 15]}
+                setValues={(values) => {
+                  setSearchParams({ ...searchParams, ageMin: values[0], ageMax: values[1] });
+                }}
               />
             </div>
             <div className="flex flex-col">
               <Typography variant="h6">
-              {`Zip Codes:`}
+                {`Zip Codes:`}
               </Typography>
               <ZipCodesInput setZipCodes={setZipCodes} />
             </div>
+            <div className="flex flex-col xl:col-span-3">
+              <LocationAccordion setZipCodes={setZipCodes} />
             </div>
+          </div>
 
           <div className="flex flex-row gap-4 mt-10">
             <Button
