@@ -13,6 +13,7 @@ import AgeSlider from "./components/AgeSlider";
 import SortingButtons from "./components/SortingButtons";
 import DogModal from "./components/DogModal";
 import LocationAccordion from "./components/LocationAccordion";
+import { ZipCodesContext } from "./api/context/ZipCodesContext";
 
 const DOGS_PER_PAGE = 16;
 
@@ -139,6 +140,7 @@ export default function Home() {
   return (
     <>
       <div className="m-4">
+        {/* Searchbar */}
         <div id="searchbar" className="flex flex-col m-10 white bg-white rounded-lg shadow-md px-10 py-4 ">
           <Typography variant="h4">
             {`Search by`}
@@ -171,10 +173,13 @@ export default function Home() {
               <Typography variant="h6">
                 {`Zip Codes:`}
               </Typography>
-              <ZipCodesInput setZipCodes={setZipCodes} />
+              <ZipCodesInput zipCodes={zipCodes} setZipCodes={setZipCodes} />
             </div>
+            {/* Location accordion */}
             <div className="flex flex-col xl:col-span-3">
-              <LocationAccordion setZipCodes={setZipCodes} />
+              <ZipCodesContext.Provider value={{ setZipCodes }}>
+                <LocationAccordion />
+              </ZipCodesContext.Provider>
             </div>
           </div>
 

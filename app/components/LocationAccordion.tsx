@@ -18,7 +18,6 @@ import { FlareSharp } from '@mui/icons-material';
 
 const CODES_PER_PAGE = 25;
 
-
 interface LocationAccordionProps {
     setZipCodes?: React.Dispatch<React.SetStateAction<string[]>>;
 }
@@ -43,8 +42,6 @@ const LocationAccordion: React.FC<LocationAccordionProps> = ({ setZipCodes }) =>
 
     const searchGeoLocations = () => {
         locationsService.searchLocations(locationParams ?? {}).then((res) => {
-            console.log(res);
-
             setFetchedLocations(res.results);
 
         }).finally(() => {
@@ -61,8 +58,12 @@ const LocationAccordion: React.FC<LocationAccordionProps> = ({ setZipCodes }) =>
 
     useEffect(() => {
         // setIsSearching(true);
-        setLocationParams({ ...locationParams, from: (page - 1) * CODES_PER_PAGE });
-    }, [page]);
+        setLocationParams({
+            ...locationParams,
+            from: (page - 1) * CODES_PER_PAGE,
+            geoBoundingBox: geoBoundingBox
+        },);
+    }, [page, geoBoundingBox]);
 
 
     const clearSearch = () => {
@@ -104,12 +105,13 @@ const LocationAccordion: React.FC<LocationAccordionProps> = ({ setZipCodes }) =>
                     </div>
                     <div className="flex lg:w-1/3 p-2">
                         {isSearching ?
-                            <div className="flex justify-center items-center">
+                            <div className="flex m-auto justify-center items-center">
                                 <CircularProgress color="secondary" />
-                            </div> :
-                            <>
-                                <LocationsDataTable locations={fetchedLocations} />
-                            </>
+                            </div>
+                            :
+                            <LocationsDataTable
+                                locations={fetchedLocations}
+                                setZipCodes={setZipCodes} />
                         }
                     </div>
                 </div>
