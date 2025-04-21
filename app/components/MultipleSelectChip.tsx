@@ -52,7 +52,7 @@ export default function MultipleSelectChip({ label, values, onChange }: Multiple
   React.useEffect(() => {
       setValueNames([]);
       onChange?.([]);
-  }, [values, onChange]);
+  }, [values]);
 
   return (
     <div>

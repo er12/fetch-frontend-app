@@ -49,7 +49,7 @@ const LocationAccordion: React.FC<LocationAccordionProps> = ({ setZipCodes }) =>
         if (isSearching) {
             searchGeoLocations();
         }
-    }, [isSearching, searchGeoLocations]);
+    }, [isSearching]);
 
     useEffect(() => {
         // setIsSearching(true);
