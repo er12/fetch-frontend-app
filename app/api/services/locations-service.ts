@@ -11,7 +11,7 @@ const fetchLocations = async (body: string[]): Promise<Location[]> => {
 };
 
 const searchLocations = async (query: LocationSearchParams): Promise<LocationSearchResponse> => {
-    const response = await api.post(LOCATIONS_SEARCH_ENDPOINT, { params: query });
+    const response = await api.post(LOCATIONS_SEARCH_ENDPOINT, { ...query });
     return response.data;
 };
 

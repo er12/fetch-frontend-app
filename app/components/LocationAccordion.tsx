@@ -13,8 +13,6 @@ import MultipleSelectChip from './MultipleSelectChip';
 import GeoBoundingBoxForm from './GeoBoundingBoxForm';
 import { locationsService } from '../api/services/locations-service';
 import LocationsDataTable from './LocationsDataTable';
-import { FlareSharp } from '@mui/icons-material';
-
 
 const CODES_PER_PAGE = 25;
 
@@ -32,23 +30,21 @@ const initSearchParams: LocationSearchParams = {
 
 const LocationAccordion: React.FC<LocationAccordionProps> = ({ setZipCodes }) => {
 
-    const [locationParams, setLocationParams] = useState<LocationSearchParams>();
+    const [locationParams, setLocationParams] = useState<LocationSearchParams>(initSearchParams);
     const [fetchedLocations, setFetchedLocations] = useState<Location[]>([]);
 
     const [geoBoundingBox, setGeoBoundingBox] = useState<GeoBoundingBox>();
     const [isSearching, setIsSearching] = React.useState<boolean>(false);
     const [page, setPage] = React.useState(1);
 
-
     const searchGeoLocations = () => {
-        locationsService.searchLocations(locationParams ?? {}).then((res) => {
+        locationsService.searchLocations(locationParams).then((res) => {
             setFetchedLocations(res.results);
 
         }).finally(() => {
             setIsSearching(false)
         });
     }
-
 
     useEffect(() => {
         if (isSearching) {
@@ -65,13 +61,11 @@ const LocationAccordion: React.FC<LocationAccordionProps> = ({ setZipCodes }) =>
         },);
     }, [page, geoBoundingBox]);
 
-
     const clearSearch = () => {
         setLocationParams(initSearchParams);
         setPage(1);
         setFetchedLocations([]);
     }
-
 
     return (
         <Accordion sx={{ width: "100%" }}>
@@ -115,7 +109,6 @@ const LocationAccordion: React.FC<LocationAccordionProps> = ({ setZipCodes }) =>
                         }
                     </div>
                 </div>
-
 
                 <div className="flex flex-row gap-4 mt-10">
                     <Button

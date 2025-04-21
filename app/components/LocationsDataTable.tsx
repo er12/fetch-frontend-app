@@ -16,7 +16,7 @@ const columns: GridColDef[] = [
 
 interface LocationsDataTableProps {
     locations: Location[];
-    setZipCodes: React.Dispatch<React.SetStateAction<string[]>>;
+    setZipCodes?: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const paginationModel = { page: 0, pageSize: 25 };
@@ -27,7 +27,7 @@ const LocationsDataTable: React.FC<LocationsDataTableProps> = ({ locations }) =>
     
     const addZipCode = (zip_code: string) => {
         
-        setZipCodes((prev)=>([...prev, zip_code]));
+        setZipCodes?.((prev)=>([...prev, zip_code]));
     };
 
     return (
