@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { FormControl } from '@mui/material';
 
@@ -14,7 +13,7 @@ const minDistance = 1;
 const AgeSlider: React.FC<ZipCodesInputProps> = ({ values, setValues }) => {
 
   //code from MUI https://mui.com/material-ui/react-slider/
-  const handleChange = (event: Event, newValue: number | number[], activeThumb: number) => {
+  const handleChange = (_event: Event, newValue: number | number[], activeThumb: number) => {
     if (Array.isArray(newValue)) {
       if (activeThumb === 0) {
         setValues([Math.min(newValue[0], values[1] - minDistance), values[1]]);

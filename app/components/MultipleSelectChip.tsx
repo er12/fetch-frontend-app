@@ -43,7 +43,7 @@ export default function MultipleSelectChip({ label, values, onChange }: Multiple
       target: { value },
     } = event;
     // On autofill we get a stringified value.
-    let splitNames = typeof value === 'string' ? value.split(',') : value;
+    const splitNames = typeof value === 'string' ? value.split(',') : value;
 
     setValueNames(splitNames);
     onChange?.(splitNames);
@@ -52,7 +52,7 @@ export default function MultipleSelectChip({ label, values, onChange }: Multiple
   React.useEffect(() => {
       setValueNames([]);
       onChange?.([]);
-  }, [values]);
+  }, [values, onChange]);
 
   return (
     <div>

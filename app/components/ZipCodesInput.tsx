@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
@@ -11,14 +11,12 @@ interface ZipCodesInputProps {
 
 const ZipCodesInput: React.FC<ZipCodesInputProps> = ({ zipCodes, setZipCodes }) => {
   //Local zipcodes beacuse it's an uncontrolled component
-  const [localZipCodes, setLocalZipCodes] = useState<string[]>(zipCodes);
 
-  const handleChange = (event: any, value: string[]) => {
+  const handleChange = (_event: React.SyntheticEvent, value: string[]) => {
     if (zipCodes.length > 99) {
       alert("You can only enter 100 zip codes");
       return;
     }
-    setLocalZipCodes(value);
     setZipCodes(value);
   };
 

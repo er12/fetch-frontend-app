@@ -21,7 +21,7 @@ export default function Login() {
       name,
       email
     };
-    userService.logIn(user).then((res) => {
+    userService.logIn(user).then(() => {
       console.log("Logged in successfully: ");
 
       setUserName(name);

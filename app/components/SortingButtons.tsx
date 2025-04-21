@@ -38,7 +38,7 @@ const SortingButtons: React.FC<SortingButtonsProps> = ({ value, onSortChange }) 
 
     const handleSortChange = (clickedSortField: keyof SortParameter) => {
 
-        let newSortValue = sortField[clickedSortField] === "asc" ? "desc" : "asc";
+        const newSortValue = sortField[clickedSortField] === "asc" ? "desc" : "asc";
 
         // If the clicked sort field is already sorted, we need to toggle the sort order and unset others
         const newSortFields = {
@@ -47,12 +47,12 @@ const SortingButtons: React.FC<SortingButtonsProps> = ({ value, onSortChange }) 
         };
         setSortField(newSortFields);
 
-        let newSortValueString = `${clickedSortField}:${newSortValue}` as SortString;
+        const newSortValueString = `${clickedSortField}:${newSortValue}` as SortString;
         onSortChange?.(newSortValueString);
     };
 
     const sortingButtons = Object.keys(initSortParams).map((key) => {
-        let sortKey = key as keyof SortParameter;
+        const sortKey = key as keyof SortParameter;
         return (
             <Button
                 key={key}

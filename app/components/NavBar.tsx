@@ -29,7 +29,7 @@ export default function NavBar() {
     if (!userName || userName == "null") {
       router.push("/login");
     }
-  }, [userName]);
+  }, [userName, router]);
 
   if (!userName || userName == "null" ||pathname == "/login") return null;
 

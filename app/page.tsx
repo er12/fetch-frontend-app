@@ -60,12 +60,12 @@ export default function Home() {
     }
   };
 
-  const searchDogsIDs = () => {
+  const searchDogsIDs = React.useCallback(() => {
     setSearchParams(searchParams);
     dogsService.searchDogsIDs(searchParams).then((res) => {
       setDogsSearchResponse(res);
     });
-  };
+  }, [searchParams]);
 
   const searchDogBreeds = () => {
     dogsService.searchDogBreeds().then((res) => {
@@ -109,19 +109,19 @@ export default function Home() {
 
   useEffect(() => {
     setIsSearching(true);
-    setSearchParams({ ...searchParams, from: (page - 1) * DOGS_PER_PAGE });
+    setSearchParams((prev) => ({ ...prev, from: (page - 1) * DOGS_PER_PAGE }));
 
-  }, [page]);
+  }, [page,]);
 
   useEffect(() => {
-    setSearchParams({ ...searchParams, zipCodes: zipCodes });
-  }, [zipCodes]);
+    setSearchParams((prev) => ({ ...prev, zipCodes: zipCodes }));
+  }, [zipCodes, setSearchParams]);
 
   useEffect(() => {
     if (isSearching) {
       searchDogsIDs();
     }
-  }, [isSearching]);
+  }, [isSearching, searchDogsIDs]);
 
   useEffect(() => {
     dogsService.getDogsByIds(dogsSearchResponse?.resultIds || []).then((res) => {

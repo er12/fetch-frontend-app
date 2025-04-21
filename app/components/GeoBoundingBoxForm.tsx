@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   TextField, MenuItem, Select, InputLabel, FormControl,
-  Grid, Button, Typography
+  Grid, Typography
 } from "@mui/material";
 import { Coordinates, GeoBoundingBox } from "../api/interfaces";
 
@@ -15,7 +15,7 @@ const GeoBoundingBoxForm: React.FC<GeoSearchInputsParams> = ({ setGeoBoundingBox
 
   useEffect(() => {
     setGeoBoundingBox?.(boundingBoxState ?? undefined);
-  }, [boundingBoxState])
+  }, [boundingBoxState, setGeoBoundingBox])
 
 
   const updateGeoMode = (value: string) => {

@@ -4,7 +4,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Button, CircularProgress, FormControl, InputLabel, List, MenuItem, Select } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import LocationPinIcon from '@mui/icons-material/LocationPin';
 import TextInput from './TextInput';
 import { usStatesAndTerritoriesAbbreviations } from '../api/constants';
@@ -37,28 +37,27 @@ const LocationAccordion: React.FC<LocationAccordionProps> = ({ setZipCodes }) =>
     const [isSearching, setIsSearching] = React.useState<boolean>(false);
     const [page, setPage] = React.useState(1);
 
-    const searchGeoLocations = () => {
+    const searchGeoLocations = React.useCallback(() => {
         locationsService.searchLocations(locationParams).then((res) => {
             setFetchedLocations(res.results);
-
         }).finally(() => {
-            setIsSearching(false)
+            setIsSearching(false);
         });
-    }
+    }, [locationParams]);
 
     useEffect(() => {
         if (isSearching) {
             searchGeoLocations();
         }
-    }, [isSearching]);
+    }, [isSearching, searchGeoLocations]);
 
     useEffect(() => {
         // setIsSearching(true);
-        setLocationParams({
-            ...locationParams,
+        setLocationParams((prevParams) => ({
+            ...prevParams,
             from: (page - 1) * CODES_PER_PAGE,
             geoBoundingBox: geoBoundingBox
-        },);
+        }));
     }, [page, geoBoundingBox]);
 
     const clearSearch = () => {
