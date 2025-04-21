@@ -49,9 +49,15 @@ export default function MultipleSelectChip({ label, values, onChange }: Multiple
     onChange?.(splitNames);
   };
 
+  const onChangeRef = React.useRef(onChange);
+
   React.useEffect(() => {
-      setValueNames([]);
-      onChange?.([]);
+    onChangeRef.current = onChange;
+  }, [onChange]);
+
+  React.useEffect(() => {
+    setValueNames([]);
+    onChangeRef.current?.([]);
   }, [values]);
 
   return (

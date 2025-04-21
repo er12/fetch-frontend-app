@@ -43,6 +43,8 @@ export default function Home() {
   const [openMatchModal, setOpenMatchModal] = React.useState<boolean>(false);
   const [dogMatch, setDogMatch] = React.useState<Dog>();
 
+  const [pageCanLoad, setPageCanLoad] = React.useState<boolean>(false);
+
 
   // Functions
   const onFavoriteChange = (dogId: string) => {
@@ -61,14 +63,15 @@ export default function Home() {
   };
 
   const searchDogsIDs = React.useCallback(() => {
-    setSearchParams(searchParams);
     dogsService.searchDogsIDs(searchParams).then((res) => {
       setDogsSearchResponse(res);
+      setPageCanLoad(true);
     });
   }, [searchParams]);
 
   const searchDogBreeds = () => {
     dogsService.searchDogBreeds().then((res) => {
+      setPageCanLoad(true);
       setDogBreeds(res);
     });
   };
@@ -102,16 +105,14 @@ export default function Home() {
   // Effects
   useEffect(() => {
     searchDogBreeds();
-    setPage(1);
     setIsSearching(true);
-    setSearchParams({ from: 0 });
   }, [])
 
   useEffect(() => {
     setIsSearching(true);
     setSearchParams((prev) => ({ ...prev, from: (page - 1) * DOGS_PER_PAGE }));
 
-  }, [page,]);
+  }, [page]);
 
   useEffect(() => {
     setSearchParams((prev) => ({ ...prev, zipCodes: zipCodes }));
@@ -137,7 +138,7 @@ export default function Home() {
   const totalPages: number = Math.ceil((dogsSearchResponse?.total || 0) / DOGS_PER_PAGE);
 
   // Render
-  return (
+  return pageCanLoad ? (
     <>
       <div className="m-4">
         {/* Searchbar */}
@@ -277,5 +278,7 @@ export default function Home() {
         />
       )}
     </>
-  );
+  )
+    :
+    null;
 }
