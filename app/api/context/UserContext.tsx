@@ -21,8 +21,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
   
   
-  const setUserName = (name: string) => {
+  const setUserName = (name: string |null) => {
     setUserNameState(name);
+    if (name === null) {
+      localStorage.removeItem('userName');
+      return;
+    }
     localStorage.setItem('userName', name);
   };
 
