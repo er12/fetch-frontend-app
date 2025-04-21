@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { NextResponse } from "next/server";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://frontend-take-home-service.fetch.com:3001/api";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://frontend-take-home-service.fetch.com";
 
 const api = axios.create({
     baseURL: API_BASE_URL,
