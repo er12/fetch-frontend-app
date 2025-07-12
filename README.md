@@ -1,7 +1,10 @@
 # fetch-frontend-appp
-Front end app for Fetch interview
+Built a responsive web app for fetching and displaying dog data using external APIs. The app showcases modular UI design through custom reusable components like JobCard, Modal, ThemeToggle, and Toast. Focused on mastering component state, props management, API integration with useEffect, and real-time user interaction. Deployed using AWS Amplify for continuous deployment and scalability.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 Appp is hosted with AWS Amplify [main.d2m1nkjf89vzla.amplifyapp.com](main.d2m1nkjf89vzla.amplifyapp.com)
+Front end app for Fetch interview.
+
 
 ## Getting Started
 
@@ -23,11 +26,3 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
