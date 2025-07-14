@@ -1,4 +1,4 @@
-# fetch-frontend-appp
+# fetch-frontend-app
 Built a responsive web app for fetching and displaying dog data using external APIs. The app showcases modular UI design through custom reusable components like JobCard, Modal, ThemeToggle, and Toast. Focused on mastering component state, props management, API integration with useEffect, and real-time user interaction. Deployed using AWS Amplify for continuous deployment and scalability.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
