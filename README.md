@@ -2,7 +2,7 @@
 Built a responsive web app for fetching and displaying dog data using external APIs. The app showcases modular UI design through custom reusable components like JobCard, Modal, ThemeToggle, and Toast. Focused on mastering component state, props management, API integration with useEffect, and real-time user interaction. Deployed using AWS Amplify for continuous deployment and scalability.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-Appp is hosted with AWS Amplify [main.d2m1nkjf89vzla.amplifyapp.com](main.d2m1nkjf89vzla.amplifyapp.com)
+Appp is hosted with AWS Amplify [main.d2m1nkjf89vzla.amplifyapp.com](main.d2m1nkjf89vzla.amplifyapp.com) -->  main.d2m1nkjf89vzla.amplifyapp.com
 Front end app for Fetch interview.
 
 
